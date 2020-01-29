@@ -52,12 +52,14 @@ $f3->set('age', '');
 $f3->set('ph', '');
 $f3->set('em', '');
 
+//if missing an optional field
+$f3->set('opt', 'Not Given');
+
 //Define a default route
 $f3->route('GET /', function($f3){
     $f3->set('title', 'Round Earth Society');
 
     $view = new Template();
-    echo $view-> render('views/header.html');
     echo $view-> render('views/home.html');
 
 });
@@ -87,7 +89,7 @@ $f3->route('GET|POST /sign-up', function($f3) {
                 $_SESSION ['g'] = $_POST['g'];
             }
             else{
-                $_SESSION ['g'] = 'Not Given';
+                $_SESSION ['g'] = $f3->get('opt');
             }
 
             $f3->reroute('/bio');
@@ -96,13 +98,13 @@ $f3->route('GET|POST /sign-up', function($f3) {
         {
             //instantiate an error array with message
             if(!validName($_POST['fn'])){
-                $f3->set("errors['fn']", "*invalid first name.");
+                $f3->set("errors['fn']", "*First name field is empty or invalid.");
             }
             if(!validName($_POST['ln'])){
-                $f3->set("errors['ln']", "*invalid first name.");
+                $f3->set("errors['ln']", "*Last name field is empty or invalid.");
             }
             if(!validAge($_POST['age'])){
-                $f3->set("errors['age']", "*invalid age. Age should be between 18 and 118.");
+                $f3->set("errors['age']", "*Age field is empty or invalid. Age should be between 18 and 118.");
             }
             if(!validPhone($_POST['ph'])){
                 $f3->set("errors['ph']", "*invalid phone number. ex: 999-999-9999");
@@ -113,7 +115,6 @@ $f3->route('GET|POST /sign-up', function($f3) {
             $f3->set('ph', $_POST['ph']);
         }
     }
-    echo $view-> render('views/header.html');
     echo $view->render('views/form1.html');
 });
 
@@ -147,7 +148,6 @@ $f3->route('GET|POST /bio', function($f3) {
             }
         }
     }
-    echo $view-> render('views/header.html');
     echo $view->render('views/form2.html');
 });
 
@@ -156,18 +156,31 @@ $f3->route('GET|POST /hobbies', function($f3) {
     $f3->set('title', 'hobbies');
 
     $view = new Template();
-    echo $view-> render('views/header.html');
+
     echo $view->render('views/form3.html');
 });
 
 $f3->route('POST /profile', function($f3) {
-    $_SESSION['in'] = $_POST['in'];
-    $_SESSION['out'] = $_POST['out'];
 
     $f3->set('title', 'profile');
 
+    if(isset($_POST['in'])||isset($_POST['out'])) {
+        if (isset($_POST['in'])) {
+            if (validHobby($_POST['in'], $f3->get('in'))) {
+                $_SESSION['in'] = $_POST['in'];
+            }
+        }
+        if (isset($_POST['out'])) {
+            if (validHobby($_POST['out'], $f3->get('out'))) {
+                $_SESSION['out'] = $_POST['out'];
+            }
+        }
+    }
+    else{
+        $_SESSION['in'] = $f3->get('opt');
+    }
+
     $view = new Template();
-    echo $view-> render('views/header.html');
     echo $view->render('views/profile.html');
 });
 

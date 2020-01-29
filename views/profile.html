@@ -7,22 +7,7 @@
  * https://github.com/medioxumate/dating2b.git
  * GreenRiverDev
  -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!--custom style sheet-->
-    <link rel="stylesheet" href="styles/styles.css"/>
-
-    <title>Profile</title>
-</head>
-<body>
-
+<include href="views/header.html">
     <section class ="container-fluid">
         <div class ="card">
             <div class="card-header">
@@ -43,10 +28,10 @@
                                     <li class ="list-group-item">Seeking: {{@SESSION.sk}}</li>
                                     <li class ="list-group-item">Interests:
                                         <repeat group="{{@SESSION.in}}" value="{{ @indoor }}">
-                                            {{ @indoor }}
+                                            {{ @indoor }},
                                         </repeat>
                                         <repeat group="{{@SESSION.out}}" value="{{ @outdoor }}">
-                                            {{ @outdoor }}
+                                            {{ @outdoor }},
                                         </repeat>
                                     </li>
                                 </ul>

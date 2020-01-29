@@ -7,13 +7,13 @@
  * https://github.com/medioxumate/dating2b.git
  * GreenRiverDev
  -->
-
-<section class ="container-fluid">
-    <form method ="Post" action ="#">
-        <div class ="card">
-            <div class="card-header">
-                <h1>Personal Information</h1>
-            </div><!--end card-header-->
+<include href="views/header.html">
+    <section class ="container-fluid">
+        <form method ="Post" action ="#">
+            <div class ="card">
+                <div class="card-header">
+                    <h1>Personal Information</h1>
+                </div><!--end card-header-->
             <div class ="card-body">
                 <div class="row">
                     <div class="col-7">
@@ -42,7 +42,7 @@
                         <div class ="row">
                             <div class="col form-group">
                                 <br>
-                                <label><b>Seeking:</b>
+                                <label><b>Seeking: <em>*Optional</em></b>
                                     <input type ="radio" name ="sk" id ="m" value="Male"><label for ="m">Male</label>
                                     <input type ="radio" name ="sk" id ="f" value ="Female"><label for ="f">Female</label>
                                     <input type ="radio" name ="sk" id ="b" value ="Either Or"><label for ="b">Both</label>
@@ -57,7 +57,7 @@
                                     <br>
                                     <div class="card">
                                         <div class="card-body">
-                                            <label>Biography</label>
+                                            <label>Biography <em>*Optional</em></label>
                                             <textarea class="form-control" name ="bio" rows="10" cols="60">{{@bio}}</textarea>
                                         </div>
                                     </div>

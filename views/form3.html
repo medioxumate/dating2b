@@ -7,7 +7,7 @@
  * https://github.com/medioxumate/dating2b.git
  * GreenRiverDev
  -->
-
+<include href="views/header.html">
 <section class ="container-fluid">
     <form method ="Post" action ="profile">
         <div class ="card">
@@ -17,7 +17,7 @@
             <div class ="card-body">
                 <div class="row">
                     <div class="col form-group">
-                        <p>In-door Interests</p>
+                        <p>In-door Interests <em>*Optional</em></p>
                         <div class ="row justify-content-around">
                                 <repeat group="{{ @in }}" value="{{ @inOption }}">
                                     <div class="col-3">
@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <div class="col form-group">
-                        <p>Out-door Interests</p>
+                        <p>Out-door Interests <em>*Optional</em></p>
                         <div class ="row justify-content-around">
                             <repeat group="{{ @out }}" value="{{ @outOption }}">
                                 <div class="col-3">
