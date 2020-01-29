@@ -26,14 +26,7 @@
                                     <li class ="list-group-item">Email: {{@SESSION.em}}</li>
                                     <li class ="list-group-item">State: {{@SESSION.st}}</li>
                                     <li class ="list-group-item">Seeking: {{@SESSION.sk}}</li>
-                                    <li class ="list-group-item">Interests:
-                                        <repeat group="{{@SESSION.in}}" value="{{ @indoor }}">
-                                            {{ @indoor }},
-                                        </repeat>
-                                        <repeat group="{{@SESSION.out}}" value="{{ @outdoor }}">
-                                            {{ @outdoor }},
-                                        </repeat>
-                                    </li>
+                                    <li class ="list-group-item">Interests: {{@SESSION.hob}}</li>
                                 </ul>
                             </div>
                         </div>

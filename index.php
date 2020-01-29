@@ -85,11 +85,11 @@ $f3->route('GET|POST /sign-up', function($f3) {
             $_SESSION ['ln'] = $_POST['ln'];
             $_SESSION ['age'] = $_POST['age'];
             $_SESSION ['ph'] = $_POST['ph'];
-            if(isset($_POST['g'])){
-                $_SESSION ['g'] = $_POST['g'];
+            if(!isset($_POST['g'])){
+                $_SESSION ['g'] = $f3->get('opt');
             }
             else{
-                $_SESSION ['g'] = $f3->get('opt');
+                $_SESSION ['g'] = $_POST['g'];
             }
 
             $f3->reroute('/bio');
@@ -131,7 +131,18 @@ $f3->route('GET|POST /bio', function($f3) {
 
             $_SESSION ['em'] = $_POST['em'];
             $_SESSION ['st'] = $_POST['st'];
-            if(isset($_POST['bio'])){
+
+            if(!isset($_POST['sk'])){
+                $_SESSION ['sk'] = $f3->get('opt');
+            }
+            else{
+                $_SESSION ['sk'] = $_POST['sk'];
+            }
+
+            if(!isset($_POST['bio'])){
+                $_SESSION ['bio'] = $f3->get('opt');
+            }
+            else{
                 $_SESSION ['bio'] = $_POST['bio'];
             }
 
@@ -164,21 +175,32 @@ $f3->route('POST /profile', function($f3) {
 
     $f3->set('title', 'profile');
 
+    $string ='';
     if(isset($_POST['in'])||isset($_POST['out'])) {
         if (isset($_POST['in'])) {
             if (validHobby($_POST['in'], $f3->get('in'))) {
-                $_SESSION['in'] = $_POST['in'];
+                foreach ($_POST['in'] as $in){
+                    $string .= $in;
+                    $string .= ', ';
+                }
             }
         }
         if (isset($_POST['out'])) {
             if (validHobby($_POST['out'], $f3->get('out'))) {
-                $_SESSION['out'] = $_POST['out'];
+                foreach ($_POST['out'] as $out){
+                    $string .= $out;
+                    $string .= ', ';
+                }
             }
         }
+        $length = strlen($string);
+        $string = substr($string, 0, $length-2);
     }
     else{
-        $_SESSION['in'] = $f3->get('opt');
+        $string = $f3->get('opt');
     }
+
+    $_SESSION['hob'] = $string;
 
     $view = new Template();
     echo $view->render('views/profile.html');
