@@ -7,24 +7,9 @@
  * https://github.com/medioxumate/dating2b.git
  * GreenRiverDev
  -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!--custom style sheet-->
-    <link rel="stylesheet" href="styles/styles.css"/>
-
-    <title>Sign up</title>
-</head>
-<body>
 
 <section class ="container-fluid">
-    <form method ="Post" action ="hobbies">
+    <form method ="Post" action ="#">
         <div class ="card">
             <div class="card-header">
                 <h1>Personal Information</h1>
@@ -36,6 +21,7 @@
                             <div class ="col form-group">
                                 <label>Email</label>
                                 <input class = "form-control" type ="text" name ="em" value ={{@em}}>
+                                <p>{{@errors[em]}}</p>
                             </div>
                         </div>
 
@@ -48,6 +34,7 @@
                                             <option>{{ @stateChoices }}</option>
                                         </repeat>
                                     </select>
+                                    <p>{{@errors[st]}}</p>
                                 </label>
                             </div>
                         </div>

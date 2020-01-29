@@ -42,6 +42,9 @@ $f3->set('states', array('Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California
     'American Samoa', 'District of Columbia', 'Guam', 'Marshall Islands', 'Northern Mariana Islands',
     'Palau', 'Puerto Rico', 'Virgin Islands'));
 
+//Error array
+$f3->set('errors', array('fn'=>'', 'ln'=>'', 'age'=>'', 'ph'=>'','em'=>'', 'st'=>''));
+
 //sticky
 $f3->set('fn', '');
 $f3->set('ln', '');
@@ -83,6 +86,9 @@ $f3->route('GET|POST /sign-up', function($f3) {
             if(isset($_POST['g'])){
                 $_SESSION ['g'] = $_POST['g'];
             }
+            else{
+                $_SESSION ['g'] = 'Not Given';
+            }
 
             $f3->reroute('/bio');
         }
@@ -90,16 +96,16 @@ $f3->route('GET|POST /sign-up', function($f3) {
         {
             //instantiate an error array with message
             if(!validName($_POST['fn'])){
-                $f3->set("errors['fn']", "error: not a valid name.");
+                $f3->set("errors['fn']", "*invalid first name.");
             }
             if(!validName($_POST['ln'])){
-                $f3->set("errors['ln']", "error: not a valid name.");
+                $f3->set("errors['ln']", "*invalid first name.");
             }
             if(!validAge($_POST['age'])){
-                $f3->set("errors['age']", "error: not a valid age.");
+                $f3->set("errors['age']", "*invalid age. Age should be between 18 and 118.");
             }
             if(!validPhone($_POST['ph'])){
-                $f3->set("errors['ph']", "error: not a valid phone number.");
+                $f3->set("errors['ph']", "*invalid phone number. ex: 999-999-9999");
             }
             $f3->set('fn', $_POST['fn']);
             $f3->set('ln', $_POST['ln']);
@@ -116,15 +122,36 @@ $f3->route('GET|POST /bio', function($f3) {
     $f3->set('title', 'Biography');
 
     $view = new Template();
+
+    //check if $POST even exists, then validate
+    if (isset($_POST['em'])&&isset($_POST['st'])) {
+        //check valid strings and numbers
+        if (validEmail($_POST['em']) && validState($f3->get('states'), $_POST['st'])) {
+
+            $_SESSION ['em'] = $_POST['em'];
+            $_SESSION ['st'] = $_POST['st'];
+            if(isset($_POST['bio'])){
+                $_SESSION ['bio'] = $_POST['bio'];
+            }
+
+            $f3->reroute('/hobbies');
+        }
+        else
+        {
+            //instantiate an error array with message
+            if(!validEmail($_POST['em'])){
+                $f3->set("errors['em']", "*email field is empty or invalid. ex: someonecool@domain.com");
+            }
+            if(!validState($f3->get('states'), $_POST['st'])){
+                $f3->set("errors['st']", "*state field is empty or invalid.");
+            }
+        }
+    }
     echo $view-> render('views/header.html');
     echo $view->render('views/form2.html');
 });
 
-$f3->route('POST /hobbies', function($f3) {
-    $_SESSION ['em'] = $_POST['em'];
-    $_SESSION ['st'] = $_POST['st'];
-    $_SESSION ['sk'] = $_POST['sk'];
-    $_SESSION ['bio'] = $_POST['bio'];
+$f3->route('GET|POST /hobbies', function($f3) {
 
     $f3->set('title', 'hobbies');
 

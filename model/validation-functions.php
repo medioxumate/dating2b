@@ -44,14 +44,14 @@ function validEmail($email){
 }
 
 /**
- * @param $state
+ * @param $states
  * @param $query
  * @return bool
  */
-function validState(array $state, $query){
+function validState($states, $query){
     $valid = false;
 
-    if(in_array($query, $state)){
+    if(in_array($query, $states)){
         $valid = true;
     }
 
