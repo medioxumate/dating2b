@@ -139,7 +139,7 @@ $f3->route('GET|POST /bio', function($f3) {
                 $_SESSION ['sk'] = $_POST['sk'];
             }
 
-            if(!isset($_POST['bio'])){
+            if($_POST['bio'] != '' || $_POST['bio'] != ' '){
                 $_SESSION ['bio'] = $f3->get('opt');
             }
             else{
@@ -167,7 +167,6 @@ $f3->route('GET|POST /hobbies', function($f3) {
     $f3->set('title', 'hobbies');
 
     $view = new Template();
-
     echo $view->render('views/form3.html');
 });
 

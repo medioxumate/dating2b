@@ -19,7 +19,7 @@
                     <div class="col-7"><!--col-7 (column 1)-->
                         <div class ="row"><!--row 1-->
                             <div class ="col form-group">
-                                <label>Email</label>
+                                <label><b>Email</b></label>
                                 <input class = "form-control" type ="text" name ="em" value ={{@em}}>
                                 <p class="alert-danger">{{@errors[em]}}</p>
                             </div>
@@ -27,7 +27,7 @@
 
                         <div class="row"><!--row 2-->
                             <div class ="col form-group">
-                                <label>State
+                                <label><b>State</b>
                                     <select class="form-control" name='st'>
                                         <option>Pick a State</option>
                                         <repeat group="{{ @states }}" value="{{ @stateChoices }}">
@@ -56,7 +56,7 @@
                                     <br>
                                     <div class="card">
                                         <div class="card-body">
-                                            <label>Biography <em>*Optional</em></label>
+                                            <label><b>Biography</b> <em>*Optional</em></label>
                                             <textarea class="form-control" name ="bio" rows="10" cols="60">{{@bio}}</textarea>
                                         </div>
                                     </div>
@@ -65,14 +65,14 @@
                         </div><!--end column 2-->
                     </div>
                 </div><!--end of card-body-->
-            <div class ="card-footer">
-                <div class="row justify-content-end">
-                    <div class="col offset-10">
-                        <button type ="submit">Next</button>
-                        <button type ="reset">Reset</button>
+                <div class ="card-footer">
+                    <div class="row justify-content-end">
+                        <div class="col offset-10">
+                            <button type ="submit">Next</button>
+                            <button type ="reset">Reset</button>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </form>
     </section>
